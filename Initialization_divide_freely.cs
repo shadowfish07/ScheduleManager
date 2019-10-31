@@ -21,7 +21,7 @@ namespace 日程管理生成系统
         {
             MaskedTextBox msender = (MaskedTextBox)sender;
             DealWithColor(msender);
-            if (msender.Text.Length == 5 && msender.ForeColor == Color.Black && GetControlCount<GroupBox>() < 6)
+            if (msender.Text.Length == 5 && msender.ForeColor == Color.Black && GetControlCount<GroupBox>() < 6 && Convert.ToInt32( msender.Tag.ToString().Substring(0,1))== GetControlCount<GroupBox>())
             {
                 GroupBox newGb = new GroupBox()
                 {

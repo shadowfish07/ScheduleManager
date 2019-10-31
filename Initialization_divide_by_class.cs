@@ -25,7 +25,7 @@ namespace 日程管理生成系统
         {
             MaskedTextBox msender = (MaskedTextBox)sender;
             DealWithColor(msender);
-            if (msender.Text.Length==5 && msender.ForeColor==Color.Black && GetControlCount<Label>()<=19)
+            if (msender.Text.Length==5 && msender.ForeColor==Color.Black && GetControlCount<Label>()<=19 && Convert.ToInt32(msender.Tag.ToString()) == GetControlCount<MaskedTextBox>())
             {
                 MaskedTextBox newMtxt = new MaskedTextBox
                 {
