@@ -181,34 +181,55 @@ namespace 日程管理生成系统
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
+            Action<string> Dofail = (error) =>
+            {
+                ProgramData.Table_List[0] = new Table("默认表");
+                MessageBox.Show(error);
+            };
             System.Globalization.DateTimeFormatInfo dfi = new System.Globalization.DateTimeFormatInfo();
             dfi.ShortDatePattern = "HH:mm:ss";
             DateTime startTime=new DateTime();
             DateTime endTime= new DateTime();
             string describsion="";
-            try
-            {
+
                 foreach (var item in groupBox1.Controls.OfType<GroupBox>())
                 {
-                
-                    foreach (var _item in item.Controls.OfType<MaskedTextBox>())
+                    try
                     {
-                        if (_item.Tag.ToString().Substring(1, 1) == "s")
-                            startTime = Convert.ToDateTime(_item.Text, dfi);
-                        else
-                            endTime = Convert.ToDateTime(_item.Text, dfi);
+                        foreach (var _item in item.Controls.OfType<MaskedTextBox>())
+                        {
+                            if (item.ForeColor == Color.Red)
+                            {
+                            Dofail("提交失败：时间格式错误");
+                            return;
+                            }
+                                
+                            if (_item.Tag.ToString().Substring(1, 1) == "s")
+                                startTime = Convert.ToDateTime(_item.Text, dfi);
+                            else
+                                endTime = Convert.ToDateTime(_item.Text, dfi);
+                        }
+                        foreach (var _item in item.Controls.OfType<TextBox>())
+                        {
+                            describsion = _item.Text;
+                        }
+                        if (!ProgramData.Table_List[0].AddTimeSpan(startTime, endTime, TimeSpan.Type.Title,describsion))
+                        {
+                            Dofail("提交失败：时间格式错误\n" + "请检查第" + item.Text + "项");
+                            return;
+                        }
+                            
+                        if (!TimeSpan.CheckVaild(ProgramData.Table_List[0].GetList(), out string error))
+                        {
+                            Dofail("提交失败：存在冲突的时间\n" + error);
+                            return;
+                        }
                     }
-                    foreach (var _item in item.Controls.OfType<TextBox>())
-                    {
-                        describsion = _item.Text;
-                    }
-                    ProgramData.Table_List[0].AddTimeSpan(startTime, endTime, describsion);
+                    catch (Exception){}
                 }
-            }
-            catch (Exception)
-            {
-            }
-            
+                Hide();
+                TableEdit te = new TableEdit();
+                te.Show();
         }
     }
 }

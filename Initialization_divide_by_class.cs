@@ -131,21 +131,39 @@ namespace 日程管理生成系统
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
+            Action<string> Dofail =(error)=>
+            {
+                ProgramData.Table_List[0] = new Table("默认表");
+                MessageBox.Show(error);
+                return;
+            };
+
             foreach (var item in groupBox1.Controls.OfType<MaskedTextBox>())
             {
                 System.Globalization.DateTimeFormatInfo dfi = new System.Globalization.DateTimeFormatInfo();
                 dfi.ShortDatePattern = "HH:mm:ss";
                 try
                 {
+                    if (item.ForeColor == Color.Red)
+                    {
+                        Dofail("提交失败：时间格式错误");
+                        return;
+                    }
                     DateTime startTime = Convert.ToDateTime(item.Text, dfi);
                     DateTime endTime = startTime.AddMinutes(int.Parse(txt_class_length.Text));
-                    ProgramData.Table_List[0].AddTimeSpan(startTime, endTime, "第" + item.Tag + "节课");
+                    ProgramData.Table_List[0].AddTimeSpan(startTime, endTime,TimeSpan.Type.Title, "第" + item.Tag + "节课");
+                        
+                    if (!TimeSpan.CheckVaild(ProgramData.Table_List[0].GetList(), out string  error))
+                    {
+                        Dofail("提交失败：存在冲突的时间\n" + error);
+                        return;
+                    }
                 }
-                catch (Exception)
-                {
-                }
-                
+                catch (Exception){}
             }
+            Hide();
+            TableEdit te = new TableEdit();
+            te.Show();
         }
     }
 }

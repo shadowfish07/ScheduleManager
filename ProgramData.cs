@@ -11,7 +11,7 @@ namespace 日程管理生成系统
 
         static ProgramData()
         {
-            Table table = new Table();
+            Table table = new Table("默认表");
             Table_List.Add(table);
         }
     }
