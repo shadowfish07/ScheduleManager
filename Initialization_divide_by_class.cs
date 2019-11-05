@@ -151,9 +151,9 @@ namespace 日程管理生成系统
                     }
                     DateTime startTime = Convert.ToDateTime(item.Text, dfi);
                     DateTime endTime = startTime.AddMinutes(int.Parse(txt_class_length.Text));
-                    ProgramData.Table_List[0].AddTimeSpan(startTime, endTime,TimeSpan.Type.Title, "第" + item.Tag + "节课");
+                    ProgramData.Table_List[0].AddTimeSpan_Title(startTime, endTime, "第" + item.Tag + "节课");
                         
-                    if (!TimeSpan.CheckVaild(ProgramData.Table_List[0].GetList(), out string  error))
+                    if (!TimeSpan_Title.CheckVaild(ProgramData.Table_List[0].GetTitileList(), out string  error))
                     {
                         Dofail("提交失败：存在冲突的时间\n" + error);
                         return;

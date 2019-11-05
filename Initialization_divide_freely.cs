@@ -213,13 +213,13 @@ namespace 日程管理生成系统
                         {
                             describsion = _item.Text;
                         }
-                        if (!ProgramData.Table_List[0].AddTimeSpan(startTime, endTime, TimeSpan.Type.Title,describsion))
+                        if (!ProgramData.Table_List[0].AddTimeSpan_Title(startTime, endTime,describsion))
                         {
                             Dofail("提交失败：时间格式错误\n" + "请检查第" + item.Text + "项");
                             return;
                         }
                             
-                        if (!TimeSpan.CheckVaild(ProgramData.Table_List[0].GetList(), out string error))
+                        if (!TimeSpan_Title.CheckVaild(ProgramData.Table_List[0].GetTitileList(), out string error))
                         {
                             Dofail("提交失败：存在冲突的时间\n" + error);
                             return;

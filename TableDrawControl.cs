@@ -18,7 +18,7 @@ namespace 日程管理生成系统
         private const int COLUMN_SPAN_FIRST = 51;
         private const int COLUMN_SPAN = 78;  
 
-        private int GetColumn(List<TimeSpan> list)
+        private int GetColumn(List<TimeSpan_Title> list)
         {
             return list.Count();
         }
@@ -36,7 +36,7 @@ namespace 日程管理生成系统
             int y = 0;
             //Label aboveLbl;
             positioningLabel[0].Text = table_data.TableName;
-            List<TimeSpan> timeSpan_list_sorted = table_data.Sort_Title();
+            List<TimeSpan_Title> timeSpan_list_sorted = TimeSpan_Title.Sort(table_data.GetTitileList());//table_data.Sort_Title();
             foreach (var item in timeSpan_list_sorted)
             {
                 ConcreteCreat(x, y++, item);
@@ -83,9 +83,8 @@ namespace 日程管理生成系统
             //}
         }
 
-        private void ConcreteCreat(int x, int y, TimeSpan item)
+        private void ConcreteCreat(int x, int y, TimeSpan_Title item)
         {
-            int span;
             int resultX;
             int resultY;
             resultX = positioningLabel[x].Location.X;
@@ -100,7 +99,7 @@ namespace 日程管理生成系统
                 TextAlign = ContentAlignment.MiddleCenter
             };
             panel.Controls.Add(newLbl);
-            TableItem newTI = new TableItem(newLbl, new TimeSpan[] { item });
+            TableItem_Context newTI = new TableItem_Context(newLbl, new TimeSpan_Title[] { item });
             current_table.Add(new Point(x, y), newLbl);
         }
     }

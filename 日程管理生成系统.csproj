@@ -98,7 +98,12 @@
       <DependentUpon>TableEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="TableItem.cs" />
+    <Compile Include="TableItem_Context.cs" />
+    <Compile Include="TableItem_Title.cs" />
     <Compile Include="TimeSpan.cs" />
+    <Compile Include="TimeSpan_Context.cs" />
+    <Compile Include="TimeSpan_Title.cs" />
+    <Compile Include="XMLManager.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
