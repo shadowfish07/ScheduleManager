@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace 日程管理生成系统
 {
-    class TableItem
+     class TableItem
     {
         private Point location;
         private Label label;

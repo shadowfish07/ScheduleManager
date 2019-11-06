@@ -23,11 +23,12 @@ namespace 日程管理生成系统
             return list.Count();
         }
 
+        
         public TableDrawControl(Panel panel,Table table_data,Label[] positioningLabel)
         {
             this.panel = panel;
             this.positioningLabel = positioningLabel;
-            this.table_data = table_data;
+            this.table_data = table_data;//TODO:table_data 不存，直接放creatTable
         }
 
         public void CreatTable()
@@ -99,7 +100,7 @@ namespace 日程管理生成系统
                 TextAlign = ContentAlignment.MiddleCenter
             };
             panel.Controls.Add(newLbl);
-            TableItem_Context newTI = new TableItem_Context(newLbl, new TimeSpan_Title[] { item });
+            //TimeSpan_Title newTI = new TimeSpan_Title(newLbl, new TimeSpan_Context[] { item });
             current_table.Add(new Point(x, y), newLbl);
         }
     }

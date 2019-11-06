@@ -5,7 +5,8 @@ using System.Text;
 
 namespace 日程管理生成系统
 {
-    class TimeSpan_Title:TimeSpan
+    [SerializableAttribute]
+    public  class TimeSpan_Title:TimeSpan
     {
         private DateTime startTime;
         private DateTime endTime;

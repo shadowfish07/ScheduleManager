@@ -5,7 +5,8 @@ using System.Text;
 
 namespace 日程管理生成系统
 {
-    class TimeSpan_Context:TimeSpan
+    [SerializableAttribute]
+    public  class TimeSpan_Context:TimeSpan
     {
         private int[] inDays;
         private int[] weeks;

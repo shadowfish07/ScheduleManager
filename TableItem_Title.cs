@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace 日程管理生成系统
 {
-    class TableItem_Title:TableItem
+     class TableItem_Title:TableItem
     {
         private TimeSpan_Title timeSpan_Title;
 

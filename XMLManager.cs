@@ -23,17 +23,41 @@ namespace 日程管理生成系统
         {
 
             PathName = Path.Combine(Directory.GetCurrentDirectory(), fileName) ;
+            PathName += ".xml";
         }
 
-        public void ConnectToXmlFile()
+        //TODO:实现写入时已存在同名文件，增加序列号
+        //private string  getVaildPath(string pathName)
+        //{
+        //    string tmp = pathName;
+        //    string result = pathName;
+        //    int i = 0;
+        //    string addS;
+        //    while (File.Exists(tmp))
+        //    {
+                
+        //    }
+
+        //}
+
+        public void WriteXmlBniary(Table table)
         {
-            if (!File.Exists(PathName))
-                ;
-            else
-            {
-                xEle = XElement.Load(PathName);
-            }
-
+            Stream fStream = new FileStream(PathName, FileMode.Create, FileAccess.ReadWrite);
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binary = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            binary.Serialize(fStream, table);
+            fStream.Close();
         }
+
+        //TODO:文件不存在时的错误处理
+        public Table ReadXmlBniary(string fileName)
+        {
+            Table result;
+            string pathName = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+            Stream fStream = new FileStream(pathName, FileMode.Open, FileAccess.ReadWrite);
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter binary = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            result = (Table)binary.Deserialize(fStream);
+            return result;
+        }
+
     }
 }

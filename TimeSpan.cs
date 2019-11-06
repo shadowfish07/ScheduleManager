@@ -5,7 +5,8 @@ using System.Text;
 
 namespace 日程管理生成系统
 {
-    class TimeSpan
+    [SerializableAttribute]
+    public  class TimeSpan
     {
         protected static int Index = 0;
 
