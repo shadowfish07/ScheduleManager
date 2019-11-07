@@ -10,7 +10,7 @@ namespace 日程管理生成系统
     {
         private DateTime startTime;
         private DateTime endTime;
-        private List<TimeSpan_Context> context;
+        private List<TimeSpan_Context> context = new List<TimeSpan_Context>();
 
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public DateTime EndTime { get => endTime; set => endTime = value; }

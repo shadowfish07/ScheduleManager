@@ -21,11 +21,15 @@ namespace 日程管理生成系统
             target.InDays = inDays;
             target.Weeks = weeks;
             target.Outline = outline;
+            UpdateLableText();
+        }
 
+        public  void UpdateLableText()
+        {
             Label.Text = "";
             foreach (var item in this.timeSpan)
             {
-                Label.Text += item.Outline + "\n";
+                Label.Text += item.Outline + "\n" + item.Describsion + "\n";//TODO:添加文本过长时，只显示概要的功能
             }
         }
 
@@ -58,6 +62,11 @@ namespace 日程管理生成系统
         public void Clear()
         {
             timeSpan = new List<TimeSpan_Context>();
+        }
+
+        public bool IsEmpty()
+        {
+            return timeSpan.Count == 0 ? true:false;
         }
     }
 }

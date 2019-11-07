@@ -38,6 +38,8 @@
             this.mtxt_class_begin_time = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btn_ok = new System.Windows.Forms.Button();
+            this.txt_maxiWeek = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,12 +150,34 @@
             this.btn_ok.UseVisualStyleBackColor = true;
             this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
+            // txt_maxiWeek
+            // 
+            this.txt_maxiWeek.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_maxiWeek.Location = new System.Drawing.Point(285, 675);
+            this.txt_maxiWeek.Name = "txt_maxiWeek";
+            this.txt_maxiWeek.Size = new System.Drawing.Size(43, 30);
+            this.txt_maxiWeek.TabIndex = 11;
+            this.txt_maxiWeek.Text = "20";
+            this.txt_maxiWeek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12.10084F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(227, 675);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 27);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "周数";
+            // 
             // Initialization_divide_by_class
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 735);
+            this.Controls.Add(this.txt_maxiWeek);
             this.Controls.Add(this.btn_ok);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -181,5 +205,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MaskedTextBox mtxt_class_begin_time;
         private System.Windows.Forms.Button btn_ok;
+        private System.Windows.Forms.TextBox txt_maxiWeek;
+        private System.Windows.Forms.Label label7;
     }
 }

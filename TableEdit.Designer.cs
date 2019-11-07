@@ -38,12 +38,48 @@
             this.lbl_Mondy = new System.Windows.Forms.Label();
             this.lbl_table_name = new System.Windows.Forms.Label();
             this.lbl_week_index = new System.Windows.Forms.Label();
+            this.btn_NewTable = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tp_title = new System.Windows.Forms.TabPage();
+            this.tb_Context = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.mtxt_begin_time = new System.Windows.Forms.MaskedTextBox();
+            this.mtxt_end_time = new System.Windows.Forms.MaskedTextBox();
+            this.txt_outline_title = new System.Windows.Forms.TextBox();
+            this.txt_describsion_title = new System.Windows.Forms.TextBox();
+            this.txt_outline_context = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.listb_context = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txt_describsion_context = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_bondWeeks = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txt_bondDays = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cmb_timeSpan = new System.Windows.Forms.ComboBox();
+            this.btn_addNewTimeSpan = new System.Windows.Forms.Button();
+            this.btn_deleteTimeSpan = new System.Windows.Forms.Button();
+            this.btn_addContext = new System.Windows.Forms.Button();
+            this.btn_deleteContext = new System.Windows.Forms.Button();
+            this.btn_NextWeek = new System.Windows.Forms.Button();
+            this.btn_preWeek = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tp_title.SuspendLayout();
+            this.tb_Context.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.btn_preWeek);
+            this.panel1.Controls.Add(this.btn_NextWeek);
             this.panel1.Controls.Add(this.lbl_Sunday);
             this.panel1.Controls.Add(this.lbl_Saturday);
             this.panel1.Controls.Add(this.lbl_Friday);
@@ -150,11 +186,321 @@
             this.lbl_week_index.Text = "第1周";
             this.lbl_week_index.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btn_NewTable
+            // 
+            this.btn_NewTable.AccessibleDescription = "";
+            this.btn_NewTable.Location = new System.Drawing.Point(889, 28);
+            this.btn_NewTable.Name = "btn_NewTable";
+            this.btn_NewTable.Size = new System.Drawing.Size(144, 39);
+            this.btn_NewTable.TabIndex = 1;
+            this.btn_NewTable.Text = "新建日程表";
+            this.btn_NewTable.UseVisualStyleBackColor = true;
+            // 
+            // btn_Save
+            // 
+            this.btn_Save.AccessibleDescription = "";
+            this.btn_Save.Location = new System.Drawing.Point(889, 85);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(144, 39);
+            this.btn_Save.TabIndex = 2;
+            this.btn_Save.Text = "保存日程表";
+            this.btn_Save.UseVisualStyleBackColor = true;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tp_title);
+            this.tabControl1.Controls.Add(this.tb_Context);
+            this.tabControl1.Location = new System.Drawing.Point(18, -28);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(852, 208);
+            this.tabControl1.TabIndex = 3;
+            // 
+            // tp_title
+            // 
+            this.tp_title.BackColor = System.Drawing.SystemColors.Control;
+            this.tp_title.Controls.Add(this.btn_deleteTimeSpan);
+            this.tp_title.Controls.Add(this.btn_addNewTimeSpan);
+            this.tp_title.Controls.Add(this.txt_describsion_title);
+            this.tp_title.Controls.Add(this.txt_outline_title);
+            this.tp_title.Controls.Add(this.mtxt_end_time);
+            this.tp_title.Controls.Add(this.mtxt_begin_time);
+            this.tp_title.Controls.Add(this.label4);
+            this.tp_title.Controls.Add(this.label3);
+            this.tp_title.Controls.Add(this.label2);
+            this.tp_title.Controls.Add(this.label1);
+            this.tp_title.Location = new System.Drawing.Point(4, 29);
+            this.tp_title.Name = "tp_title";
+            this.tp_title.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_title.Size = new System.Drawing.Size(844, 175);
+            this.tp_title.TabIndex = 0;
+            this.tp_title.Text = "tabPage1";
+            // 
+            // tb_Context
+            // 
+            this.tb_Context.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_Context.Controls.Add(this.btn_deleteContext);
+            this.tb_Context.Controls.Add(this.btn_addContext);
+            this.tb_Context.Controls.Add(this.cmb_timeSpan);
+            this.tb_Context.Controls.Add(this.label10);
+            this.tb_Context.Controls.Add(this.txt_bondDays);
+            this.tb_Context.Controls.Add(this.label9);
+            this.tb_Context.Controls.Add(this.txt_bondWeeks);
+            this.tb_Context.Controls.Add(this.label8);
+            this.tb_Context.Controls.Add(this.txt_describsion_context);
+            this.tb_Context.Controls.Add(this.label7);
+            this.tb_Context.Controls.Add(this.label6);
+            this.tb_Context.Controls.Add(this.listb_context);
+            this.tb_Context.Controls.Add(this.label5);
+            this.tb_Context.Controls.Add(this.txt_outline_context);
+            this.tb_Context.Location = new System.Drawing.Point(4, 29);
+            this.tb_Context.Name = "tb_Context";
+            this.tb_Context.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_Context.Size = new System.Drawing.Size(844, 175);
+            this.tb_Context.TabIndex = 1;
+            this.tb_Context.Text = "tabPage2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "开始时间";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "结束时间";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 90);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "概述";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(335, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "详细描述";
+            // 
+            // mtxt_begin_time
+            // 
+            this.mtxt_begin_time.Font = new System.Drawing.Font("微软雅黑", 9.07563F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.mtxt_begin_time.Location = new System.Drawing.Point(90, 8);
+            this.mtxt_begin_time.Mask = "90:00";
+            this.mtxt_begin_time.Name = "mtxt_begin_time";
+            this.mtxt_begin_time.Size = new System.Drawing.Size(77, 27);
+            this.mtxt_begin_time.TabIndex = 10;
+            this.mtxt_begin_time.Tag = "1";
+            this.mtxt_begin_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxt_begin_time.ValidatingType = typeof(System.DateTime);
+            // 
+            // mtxt_end_time
+            // 
+            this.mtxt_end_time.Font = new System.Drawing.Font("微软雅黑", 9.07563F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.mtxt_end_time.Location = new System.Drawing.Point(90, 46);
+            this.mtxt_end_time.Mask = "90:00";
+            this.mtxt_end_time.Name = "mtxt_end_time";
+            this.mtxt_end_time.Size = new System.Drawing.Size(77, 27);
+            this.mtxt_end_time.TabIndex = 11;
+            this.mtxt_end_time.Tag = "1";
+            this.mtxt_end_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxt_end_time.ValidatingType = typeof(System.DateTime);
+            // 
+            // txt_outline_title
+            // 
+            this.txt_outline_title.Location = new System.Drawing.Point(90, 87);
+            this.txt_outline_title.Name = "txt_outline_title";
+            this.txt_outline_title.Size = new System.Drawing.Size(241, 27);
+            this.txt_outline_title.TabIndex = 12;
+            // 
+            // txt_describsion_title
+            // 
+            this.txt_describsion_title.Location = new System.Drawing.Point(410, 11);
+            this.txt_describsion_title.Multiline = true;
+            this.txt_describsion_title.Name = "txt_describsion_title";
+            this.txt_describsion_title.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_describsion_title.Size = new System.Drawing.Size(257, 158);
+            this.txt_describsion_title.TabIndex = 13;
+            // 
+            // txt_outline_context
+            // 
+            this.txt_outline_context.Location = new System.Drawing.Point(520, 5);
+            this.txt_outline_context.Name = "txt_outline_context";
+            this.txt_outline_context.Size = new System.Drawing.Size(211, 27);
+            this.txt_outline_context.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "事件";
+            // 
+            // listb_context
+            // 
+            this.listb_context.FormattingEnabled = true;
+            this.listb_context.ItemHeight = 20;
+            this.listb_context.Location = new System.Drawing.Point(10, 31);
+            this.listb_context.Name = "listb_context";
+            this.listb_context.Size = new System.Drawing.Size(154, 124);
+            this.listb_context.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(445, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 20);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "概述";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(445, 36);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 20);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "详细说明";
+            // 
+            // txt_describsion_context
+            // 
+            this.txt_describsion_context.Location = new System.Drawing.Point(520, 38);
+            this.txt_describsion_context.Multiline = true;
+            this.txt_describsion_context.Name = "txt_describsion_context";
+            this.txt_describsion_context.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_describsion_context.Size = new System.Drawing.Size(211, 131);
+            this.txt_describsion_context.TabIndex = 18;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(174, 56);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(69, 20);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "绑定周数";
+            // 
+            // txt_bondWeeks
+            // 
+            this.txt_bondWeeks.Location = new System.Drawing.Point(249, 54);
+            this.txt_bondWeeks.Name = "txt_bondWeeks";
+            this.txt_bondWeeks.Size = new System.Drawing.Size(190, 27);
+            this.txt_bondWeeks.TabIndex = 20;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(174, 103);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "绑定星期";
+            // 
+            // txt_bondDays
+            // 
+            this.txt_bondDays.Location = new System.Drawing.Point(249, 101);
+            this.txt_bondDays.Name = "txt_bondDays";
+            this.txt_bondDays.Size = new System.Drawing.Size(190, 27);
+            this.txt_bondDays.TabIndex = 22;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(173, 9);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(69, 20);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "绑定时间";
+            // 
+            // cmb_timeSpan
+            // 
+            this.cmb_timeSpan.FormattingEnabled = true;
+            this.cmb_timeSpan.Location = new System.Drawing.Point(248, 6);
+            this.cmb_timeSpan.Name = "cmb_timeSpan";
+            this.cmb_timeSpan.Size = new System.Drawing.Size(191, 28);
+            this.cmb_timeSpan.TabIndex = 24;
+            // 
+            // btn_addNewTimeSpan
+            // 
+            this.btn_addNewTimeSpan.Location = new System.Drawing.Point(716, 18);
+            this.btn_addNewTimeSpan.Name = "btn_addNewTimeSpan";
+            this.btn_addNewTimeSpan.Size = new System.Drawing.Size(109, 31);
+            this.btn_addNewTimeSpan.TabIndex = 14;
+            this.btn_addNewTimeSpan.Text = "新增时间段";
+            this.btn_addNewTimeSpan.UseVisualStyleBackColor = true;
+            // 
+            // btn_deleteTimeSpan
+            // 
+            this.btn_deleteTimeSpan.Location = new System.Drawing.Point(716, 55);
+            this.btn_deleteTimeSpan.Name = "btn_deleteTimeSpan";
+            this.btn_deleteTimeSpan.Size = new System.Drawing.Size(109, 31);
+            this.btn_deleteTimeSpan.TabIndex = 15;
+            this.btn_deleteTimeSpan.Text = "删除时间段";
+            this.btn_deleteTimeSpan.UseVisualStyleBackColor = true;
+            // 
+            // btn_addContext
+            // 
+            this.btn_addContext.Location = new System.Drawing.Point(748, 38);
+            this.btn_addContext.Name = "btn_addContext";
+            this.btn_addContext.Size = new System.Drawing.Size(81, 30);
+            this.btn_addContext.TabIndex = 25;
+            this.btn_addContext.Text = "增加事件";
+            this.btn_addContext.UseVisualStyleBackColor = true;
+            // 
+            // btn_deleteContext
+            // 
+            this.btn_deleteContext.Location = new System.Drawing.Point(748, 93);
+            this.btn_deleteContext.Name = "btn_deleteContext";
+            this.btn_deleteContext.Size = new System.Drawing.Size(81, 30);
+            this.btn_deleteContext.TabIndex = 26;
+            this.btn_deleteContext.Text = "删除事件";
+            this.btn_deleteContext.UseVisualStyleBackColor = true;
+            // 
+            // btn_NextWeek
+            // 
+            this.btn_NextWeek.Font = new System.Drawing.Font("微软雅黑", 12.10084F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_NextWeek.Location = new System.Drawing.Point(1011, 3);
+            this.btn_NextWeek.Name = "btn_NextWeek";
+            this.btn_NextWeek.Size = new System.Drawing.Size(38, 44);
+            this.btn_NextWeek.TabIndex = 9;
+            this.btn_NextWeek.Text = ">";
+            this.btn_NextWeek.UseVisualStyleBackColor = true;
+            // 
+            // btn_preWeek
+            // 
+            this.btn_preWeek.Font = new System.Drawing.Font("微软雅黑", 12.10084F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_preWeek.Location = new System.Drawing.Point(9, 3);
+            this.btn_preWeek.Name = "btn_preWeek";
+            this.btn_preWeek.Size = new System.Drawing.Size(38, 44);
+            this.btn_preWeek.TabIndex = 10;
+            this.btn_preWeek.Text = "<";
+            this.btn_preWeek.UseVisualStyleBackColor = true;
+            // 
             // TableEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 770);
+            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.btn_Save);
+            this.Controls.Add(this.btn_NewTable);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9.07563F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -162,6 +508,11 @@
             this.Text = "TableEdit";
             this.Load += new System.EventHandler(this.TableEdit_Load);
             this.panel1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tp_title.ResumeLayout(false);
+            this.tp_title.PerformLayout();
+            this.tb_Context.ResumeLayout(false);
+            this.tb_Context.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -178,5 +529,36 @@
         private System.Windows.Forms.Label lbl_Mondy;
         private System.Windows.Forms.Label lbl_table_name;
         private System.Windows.Forms.Label lbl_week_index;
+        private System.Windows.Forms.Button btn_NewTable;
+        private System.Windows.Forms.Button btn_Save;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tp_title;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tb_Context;
+        private System.Windows.Forms.TextBox txt_describsion_title;
+        private System.Windows.Forms.TextBox txt_outline_title;
+        private System.Windows.Forms.MaskedTextBox mtxt_end_time;
+        private System.Windows.Forms.MaskedTextBox mtxt_begin_time;
+        private System.Windows.Forms.ComboBox cmb_timeSpan;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txt_bondDays;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txt_bondWeeks;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_describsion_context;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox listb_context;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_outline_context;
+        private System.Windows.Forms.Button btn_preWeek;
+        private System.Windows.Forms.Button btn_NextWeek;
+        private System.Windows.Forms.Button btn_deleteTimeSpan;
+        private System.Windows.Forms.Button btn_addNewTimeSpan;
+        private System.Windows.Forms.Button btn_deleteContext;
+        private System.Windows.Forms.Button btn_addContext;
     }
 }

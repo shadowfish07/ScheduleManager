@@ -183,7 +183,7 @@ namespace 日程管理生成系统
         {
             Action<string> Dofail = (error) =>
             {
-                ProgramData.Table_List[0] = new Table("默认表");
+                ProgramData.Table_List[0] = new Table("默认表", int.Parse(txt_maxiWeek.Text));
                 MessageBox.Show(error);
             };
             System.Globalization.DateTimeFormatInfo dfi = new System.Globalization.DateTimeFormatInfo();

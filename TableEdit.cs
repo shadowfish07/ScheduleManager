@@ -20,8 +20,8 @@ namespace 日程管理生成系统
         {
             //l.Remove(l.FindLast(t => t.Index1 == 1));
 
-            TableDrawControl tbDrawer = new TableDrawControl(panel1, ProgramData.Table_List[0], new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
-            tbDrawer.CreatTable();
+            TableDrawControl tbDrawer = new TableDrawControl(panel1,  new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
+            tbDrawer.CreatTable(ProgramData.Table_List[0]);
 
         }
     }

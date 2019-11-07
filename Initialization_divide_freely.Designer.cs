@@ -30,9 +30,6 @@
         {
             this.btn_ok = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,6 +37,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.mtxt_span_begin_time = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_maxiWeek = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -63,36 +65,6 @@
             this.groupBox1.Size = new System.Drawing.Size(873, 426);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 15.73109F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(27, 192);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(270, 35);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "2.请输入具体计划信息";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 21.78151F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(25, 99);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(704, 46);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "在开始自律前，先告诉我一些基本信息吧！";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 41.7479F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(18, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(670, 89);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "YO~第一次使用呀！";
             // 
             // groupBox2
             // 
@@ -173,11 +145,63 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "区间1开始时间";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 15.73109F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(27, 192);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(270, 35);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "2.请输入具体计划信息";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 21.78151F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(25, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(704, 46);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "在开始自律前，先告诉我一些基本信息吧！";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 41.7479F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(18, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(670, 89);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "YO~第一次使用呀！";
+            // 
+            // txt_maxiWeek
+            // 
+            this.txt_maxiWeek.Font = new System.Drawing.Font("微软雅黑", 10.28571F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_maxiWeek.Location = new System.Drawing.Point(290, 676);
+            this.txt_maxiWeek.Name = "txt_maxiWeek";
+            this.txt_maxiWeek.Size = new System.Drawing.Size(43, 30);
+            this.txt_maxiWeek.TabIndex = 16;
+            this.txt_maxiWeek.Text = "20";
+            this.txt_maxiWeek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12.10084F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(232, 676);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 27);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "周数";
+            // 
             // Initialization_divide_freely
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 735);
+            this.Controls.Add(this.txt_maxiWeek);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_ok);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
@@ -209,5 +233,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.MaskedTextBox mtxt_span_begin_time;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txt_maxiWeek;
+        private System.Windows.Forms.Label label7;
     }
 }
