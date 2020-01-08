@@ -7,6 +7,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace 日程管理生成系统
 {
+    /// <summary>
+    /// 具体事件
+    /// </summary>
     [SerializableAttribute]
     public class TimeSpan_Context:TimeSpan,ICloneable
     {

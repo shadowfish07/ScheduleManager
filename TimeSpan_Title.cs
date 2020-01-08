@@ -7,12 +7,28 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace 日程管理生成系统
 {
+    /// <summary>
+    /// 事件的时间区间
+    /// </summary>
     [SerializableAttribute]
     public  class TimeSpan_Title:TimeSpan, ICloneable
     {
         private DateTime startTime;
         private DateTime endTime;
         private List<TimeSpan_Context> context = new List<TimeSpan_Context>();
+
+        public DateTime StartTime { get => startTime; set => startTime = value; }
+        public DateTime EndTime { get => endTime; set => endTime = value; }
+        internal List<TimeSpan_Context> Context { get => context; set => context = value; }
+
+        public TimeSpan_Title(DateTime startTime, DateTime endTime, string describsion = "")
+        {
+            StartTime = startTime;
+            EndTime = endTime;
+            Describsion = describsion;
+            Outline = describsion;
+        }
+
 
         /// <summary>
         /// 返回深拷贝
@@ -30,19 +46,6 @@ namespace 日程管理生成系统
                 stream.Seek(0, System.IO.SeekOrigin.Begin);
                 return formatter.Deserialize(stream);
             }
-        }
-
-
-        public DateTime StartTime { get => startTime; set => startTime = value; }
-        public DateTime EndTime { get => endTime; set => endTime = value; }
-        internal List<TimeSpan_Context> Context { get => context; set => context = value; }
-
-        public TimeSpan_Title(DateTime startTime, DateTime endTime, string describsion = "")
-        {
-            StartTime = startTime;
-            EndTime = endTime;
-            Describsion = describsion;
-            Outline = describsion;
         }
 
         /// <summary>
