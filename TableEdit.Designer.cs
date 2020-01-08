@@ -548,6 +548,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TableEdit";
             this.Text = "TableEdit";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableEdit_FormClosed);
             this.Load += new System.EventHandler(this.TableEdit_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

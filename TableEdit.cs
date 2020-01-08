@@ -32,7 +32,16 @@ namespace 日程管理生成系统
             Table_DataSource = ProgramData.Table_List[0];
             currentWeek = 1;
         }
+        private void TableEdit_Load(object sender, EventArgs e)
+        {
+            //l.Remove(l.FindLast(t => t.Index1 == 1));
+            listBox_TimeSpan_Context = new EnhancedList(listb_context);
 
+            tbDrawer = new TableDrawControl(panel1, Current_Table, new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
+
+            tbDrawer.CreatTable(Table_DataSource);
+
+        }
         public TableEdit(Table table)
         {
             InitializeComponent();
@@ -97,20 +106,6 @@ namespace 日程管理生成系统
             }
         }
 
-
-        
-        private void TableEdit_Load(object sender, EventArgs e)
-        {
-            //l.Remove(l.FindLast(t => t.Index1 == 1));
-            listBox_TimeSpan_Context = new EnhancedList(listb_context);
-
-            tbDrawer = new TableDrawControl(panel1, Current_Table, new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
-
-            tbDrawer.CreatTable(Table_DataSource);
-
-        }
-
-
         /// <summary>
         /// 处理日程表单击事件
         /// </summary>
@@ -152,8 +147,16 @@ namespace 日程管理生成系统
         private void DispayTitleInfo(TableItem_Title tt)
         {
             tabControl1.SelectedTab = tp_title;
-            mtxt_begin_time.Text = tt.TimeSpan_Title.StartTime.ToString("t");
-            mtxt_end_time.Text = tt.TimeSpan_Title.EndTime.ToString("t");
+
+            if(DateTime.Compare(tt.TimeSpan_Title.StartTime,Convert.ToDateTime("10:00"))<0)
+                mtxt_begin_time.Text = "0"+ tt.TimeSpan_Title.StartTime.ToString("t");
+            else
+                mtxt_begin_time.Text = tt.TimeSpan_Title.StartTime.ToString("t");
+            if (DateTime.Compare(tt.TimeSpan_Title.EndTime, Convert.ToDateTime("10:00")) < 0)
+                mtxt_end_time.Text = "0"+ tt.TimeSpan_Title.EndTime.ToString("t");
+            else
+                mtxt_end_time.Text = tt.TimeSpan_Title.EndTime.ToString("t");
+
             txt_describsion_title.Text = tt.TimeSpan_Title.Describsion;
             txt_outline_title.Text = tt.TimeSpan_Title.Outline;
         }
@@ -228,7 +231,7 @@ namespace 日程管理生成系统
             {
                 tsc.ReadWeeks(txt_bondWeeks.Text);
             }
-            catch (Exception){}
+            catch (ArgumentException) {}
             tsc.Outline = txt_outline_context.Text;
             tc.UpdateLableText();
         }
@@ -276,6 +279,11 @@ namespace 日程管理生成系统
         private void btn_deleteContext_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TableEdit_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

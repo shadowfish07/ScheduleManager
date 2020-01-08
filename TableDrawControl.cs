@@ -18,11 +18,16 @@ namespace 日程管理生成系统
         private const int COLUMN_SPAN_FIRST = 51;
         private const int COLUMN_SPAN = 78;  
 
-        public void Edit(Point point,TimeSpan timeSpan)
+        public void Edit(Point location,TimeSpan timeSpan)
         {
 
         }
-
+        
+        /// <summary>
+        /// 返回列表行数
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         private int GetColumn(List<TimeSpan_Title> list)
         {
             return list.Count();
