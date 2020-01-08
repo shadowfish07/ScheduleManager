@@ -8,14 +8,20 @@ using System.Drawing;
 
 namespace 日程管理生成系统
 {
+    //TODO:TEST ALL FUNCTION
     class TableDrawControl
     {
-        private Hashtable current_table = new Hashtable();
+        private Hashtable table_current ;
         private Label[] positioningLabel;
         private Panel panel;
 
         private const int COLUMN_SPAN_FIRST = 51;
         private const int COLUMN_SPAN = 78;  
+
+        public void Edit(Point point,TimeSpan timeSpan)
+        {
+
+        }
 
         private int GetColumn(List<TimeSpan_Title> list)
         {
@@ -27,10 +33,11 @@ namespace 日程管理生成系统
         /// </summary>
         /// <param name="panel"></param>
         /// <param name="positioningLabel">周一从第2个元素开始</param>
-        public TableDrawControl(Panel panel,Label[] positioningLabel)
+        public TableDrawControl(Panel panel,Hashtable table_current,Label[] positioningLabel)
         {
             this.panel = panel;
             this.positioningLabel = positioningLabel;
+            this.table_current = table_current;
         }
 
         public void CreatTable(Table table_data)
@@ -80,7 +87,8 @@ namespace 日程管理生成系统
             };
             panel.Controls.Add(newLbl);
             TableItem_Context newTC = new TableItem_Context(newLbl);
-            current_table.Add(new Point(x, y), newTC);
+            newTC.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
+            table_current.Add(new Point(x, y), newTC);
         }
 
         private void CreatItem(int x, int y, TimeSpan item)
@@ -106,7 +114,8 @@ namespace 日程管理生成系统
                 };
                 newLbl.Text = tmp.Outline + "\n" + tmp.StartTime.ToString("t") + "-" + tmp.EndTime.ToString("t");
                 TableItem_Title newTT = new TableItem_Title(newLbl, (TimeSpan_Title)item);
-                current_table.Add(new Point(x, y),newTT);
+                newTT.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
+                table_current.Add(new Point(x, y),newTT);
                 panel.Controls.Add(newLbl);
             }
             else
@@ -114,11 +123,11 @@ namespace 日程管理生成系统
                 //创建context
 
                 TimeSpan_Context tmp = (TimeSpan_Context)item;
-                if (current_table.ContainsKey(new Point(x,y)))
+                if (table_current.ContainsKey(new Point(x,y)))
                 {
                     //已存在时，添加
                     
-                    TableItem_Context ttmp = (TableItem_Context)current_table[new Point(x, y)];
+                    TableItem_Context ttmp = (TableItem_Context)table_current[new Point(x, y)];
                     ttmp.Add(tmp);
                     ttmp.UpdateLableText();
                 }
@@ -135,7 +144,8 @@ namespace 日程管理生成系统
                         TextAlign = ContentAlignment.MiddleCenter
                     };
                     TableItem_Context newTC = new TableItem_Context(newLbl,new TimeSpan_Context[] { (TimeSpan_Context)item });
-                    current_table.Add(new Point(x, y), newTC);
+                    newTC.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
+                    table_current.Add(new Point(x, y), newTC);
                     newTC.UpdateLableText();
                     panel.Controls.Add(newLbl);
                 }

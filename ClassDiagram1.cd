@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="日程管理生成系统.TableItem" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEEAAABAAAAIAAAACAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TableItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TableItem_Context" Collapsed="true">
+    <Position X="5.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAAIAAAAAAAAAAQAAAAQAABAACAAAAAABAAAg=</HashCode>
+      <FileName>TableItem_Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TableItem_Title" Collapsed="true">
+    <Position X="8.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAUAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TableItem_Title.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TimeSpan" Collapsed="true">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAQAAAEAAAABAAAAAAAEAAAABAAA=</HashCode>
+      <FileName>TimeSpan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TimeSpan_Context" Collapsed="true">
+    <Position X="3.25" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAQACBAAAAAAAEgAAAgRAAAIIAAAAIAAIAAAAEAE=</HashCode>
+      <FileName>TimeSpan_Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TimeSpan_Title" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAAAAwACAAIAAgAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>TimeSpan_Title.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.XMLManager" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>XMLManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.Table" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>CACAEAAAABAAAAAAQAAAAAAAAAAAAAAFAEAAAQAAAAA=</HashCode>
+      <FileName>Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.ProgramData" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>ProgramData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.LabelClickedEventArgs" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>LabelClickedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="日程管理生成系统.TableDrawControl" Collapsed="true">
+    <Position X="6" Y="1.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAQAAAAAAAAAAAAAAAAICBAAAAAAACAIAAAQAAgAg=</HashCode>
+      <FileName>TableDrawControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9.08" />
+</ClassDiagram>

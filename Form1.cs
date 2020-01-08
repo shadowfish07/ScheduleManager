@@ -19,8 +19,6 @@ namespace 日程管理生成系统
 
         private void Form1_Load(object sender, EventArgs e)
         {
-                
-                
         }
 
         private void Form1_Shown(object sender, EventArgs e)

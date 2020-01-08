@@ -166,8 +166,7 @@ namespace 日程管理生成系统
             XMLManager x = new XMLManager(ProgramData.Table_List[0].TableName);
             x.WriteXmlBniary(ProgramData.Table_List[0]);
 
-            TableEdit te = new TableEdit();
-            te.Show();
+            ProgramData.Form_TableEdit.Show();
         }
     }
 }

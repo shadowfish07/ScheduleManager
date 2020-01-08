@@ -6,12 +6,12 @@ using System.Text;
 namespace 日程管理生成系统
 {
     [SerializableAttribute]
-    public  class TimeSpan
+    public  class TimeSpan:ICloneable
     {
         protected static int Index = 0;
 
-        private string describsion;
-        private string outline;
+        private string describsion="";
+        private string outline = "";
         private int index1;
 
 
@@ -22,6 +22,11 @@ namespace 日程管理生成系统
         public TimeSpan()
         {
             Index1 = TimeSpan_Title.Index++;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
 
 

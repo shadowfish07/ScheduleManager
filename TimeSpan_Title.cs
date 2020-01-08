@@ -2,15 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace 日程管理生成系统
 {
     [SerializableAttribute]
-    public  class TimeSpan_Title:TimeSpan
+    public  class TimeSpan_Title:TimeSpan, ICloneable
     {
         private DateTime startTime;
         private DateTime endTime;
         private List<TimeSpan_Context> context = new List<TimeSpan_Context>();
+
+        /// <summary>
+        /// 返回深拷贝
+        /// </summary>
+        /// <see cref="https://blog.csdn.net/XJAVASunjava/article/details/7648242"/>
+        /// <remarks>深克隆代码来自网络，待测试是否有效</remarks>
+        /// <returns></returns>
+        public new object Clone()
+        {
+            //TODO：测试是否有效
+            using (System.IO.Stream stream = new System.IO.MemoryStream())
+            {
+                IFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, typeof(TimeSpan_Context));
+                stream.Seek(0, System.IO.SeekOrigin.Begin);
+                return formatter.Deserialize(stream);
+            }
+        }
+
 
         public DateTime StartTime { get => startTime; set => startTime = value; }
         public DateTime EndTime { get => endTime; set => endTime = value; }

@@ -86,6 +86,7 @@
     <Compile Include="Initialization_divide_freely.Designer.cs">
       <DependentUpon>Initialization_divide_freely.cs</DependentUpon>
     </Compile>
+    <Compile Include="LabelClickedEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgramData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +129,7 @@
     <EmbeddedResource Include="TableEdit.resx">
       <DependentUpon>TableEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

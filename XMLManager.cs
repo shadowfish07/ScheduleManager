@@ -10,8 +10,6 @@ namespace 日程管理生成系统
     class XMLManager
     {
         private string pathName;
-        private XDocument xDoc;
-        private XElement xEle;
 
         public string PathName { get => pathName; set => pathName = value; }
 
