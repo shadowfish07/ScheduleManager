@@ -10,18 +10,18 @@ using System.IO;
 
 namespace 日程管理生成系统
 {
-    public partial class Form1 : Form
+    public partial class LoadTables : Form
     {
-        public Form1()
+        public LoadTables()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void LoadTables_Load(object sender, EventArgs e)
         {
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
+        private void LoadTables_Shown(object sender, EventArgs e)
         {
             if (!Directory.Exists("Data.xml"))
             {
@@ -29,6 +29,11 @@ namespace 日程管理生成系统
                 Initialization intf = new Initialization();
                 intf.Show();
             }
+        }
+
+        private void ReadDicTableFiles()
+        {
+            
         }
     }
 }

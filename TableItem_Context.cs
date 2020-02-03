@@ -37,25 +37,26 @@ namespace 日程管理生成系统
 
         //TODO:重绘图表
 
+        #region 用不到的且不能用的重载
+        ///// <summary>
+        ///// 修改一项事件
+        ///// </summary>
+        ///// <param name="describsion">修改后的事件描述</param>
+        ///// <param name="outline">修改后的事件概述</param>
+        ///// <param name="inDays">修改后的事件响应天</param>
+        ///// <param name="weeks">修改后的事件响应周</param>
+        ///// <param name="oldIndex">要修改的事件Index值</param>
+        //public void Edit(string describsion,string outline, int[] inDays,int[] weeks,int oldIndex)
+        //{
 
-        /// <summary>
-        /// 修改一项事件
-        /// </summary>
-        /// <param name="describsion">修改后的事件描述</param>
-        /// <param name="outline">修改后的事件概述</param>
-        /// <param name="inDays">修改后的事件响应天</param>
-        /// <param name="weeks">修改后的事件响应周</param>
-        /// <param name="oldIndex">要修改的事件Index值</param>
-        public void Edit(string describsion,string outline, int[] inDays,int[] weeks,int oldIndex)
-        {
-           
-            TimeSpan_Context target = this.timeSpan.Find(t => t.Index1 == oldIndex);//Learn this way to find a specific item
-            target.Describsion = describsion;
-            target.InDays = inDays;
-            target.Weeks = weeks;
-            target.Outline = outline;
-            UpdateLableText();
-        }
+        //    TimeSpan_Context target = this.timeSpan.Find(t => t.Index1 == oldIndex);//Learn this way to find a specific item
+        //    target.Describsion = describsion;
+        //    target.InDays = inDays;
+        //    target.Weeks = weeks;
+        //    target.Outline = outline;
+        //    UpdateLableText();
+        //}
+        #endregion
 
         /// <summary>
         /// 修改一项事件,参数不正确会返回ArgumentException

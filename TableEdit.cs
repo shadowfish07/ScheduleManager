@@ -15,6 +15,9 @@ namespace 日程管理生成系统
     {
 
         TableDrawControl tbDrawer;
+        /// <summary>
+        /// 当前读取的列表项数据
+        /// </summary>
         EnhancedList listBox_TimeSpan_Context;
         Table Table_DataSource;
 
@@ -94,6 +97,7 @@ namespace 日程管理生成系统
                 {
                     Add(item);
                 }
+                if(listbox.Items.Count!=0) listbox.SelectedIndex = 0;
             }
 
             /// <summary>
@@ -211,6 +215,8 @@ namespace 日程管理生成系统
             newTC.Outline = "新建事件";
             listBox_TimeSpan_Context.Add(newTC);
             listBox_TimeSpan_Context.Listbox.SelectedIndex = listBox_TimeSpan_Context.Listbox.Items.Count - 1;
+            TableItem_Context TC = (TableItem_Context)tableItem;
+            TC.Add(newTC);
         }
 
         /// <summary>

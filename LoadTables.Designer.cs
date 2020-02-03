@@ -1,6 +1,6 @@
 ﻿namespace 日程管理生成系统
 {
-    partial class Form1
+    partial class LoadTables
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -39,8 +39,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Load += new System.EventHandler(this.LoadTables_Load);
+            this.Shown += new System.EventHandler(this.LoadTables_Shown);
             this.ResumeLayout(false);
 
         }

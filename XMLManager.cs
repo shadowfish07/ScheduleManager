@@ -21,7 +21,7 @@ namespace 日程管理生成系统
         {
 
             PathName = Path.Combine(Directory.GetCurrentDirectory(), fileName) ;
-            PathName += ".xml";
+            PathName += ProgramData.TABLE_EXTRA_NAME;
         }
 
         //TODO:实现写入时已存在同名文件，增加序列号

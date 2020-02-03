@@ -62,11 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="LoadTables.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="LoadTables.Designer.cs">
+      <DependentUpon>LoadTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Initialization.cs">
       <SubType>Form</SubType>
@@ -105,8 +105,8 @@
     <Compile Include="TimeSpan_Context.cs" />
     <Compile Include="TimeSpan_Title.cs" />
     <Compile Include="XMLManager.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="LoadTables.resx">
+      <DependentUpon>LoadTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Initialization.resx">
       <DependentUpon>Initialization.cs</DependentUpon>
