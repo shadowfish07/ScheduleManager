@@ -103,6 +103,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Initialization";
             this.Text = "Initialization";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Initialization_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

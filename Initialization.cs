@@ -29,5 +29,10 @@ namespace 日程管理生成系统
             ff.Show();
             Hide();
         }
+
+        private void Initialization_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

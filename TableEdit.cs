@@ -15,10 +15,12 @@ namespace 日程管理生成系统
     {
 
         TableDrawControl tbDrawer;
+
         /// <summary>
         /// 当前读取的列表项数据
         /// </summary>
         EnhancedList listBox_TimeSpan_Context;
+
         Table Table_DataSource;
 
         //存储TableItem的XY坐标，用来以坐标访问TableItem
@@ -111,6 +113,20 @@ namespace 日程管理生成系统
         }
 
         /// <summary>
+        /// 列表单击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void list_Click(object sender, EventArgs e)
+        {
+            txt_outline_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Outline;
+            txt_describsion_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Describsion;
+            txt_bondDays.Text = listBox_TimeSpan_Context.GetCurrentTC().PrintDaysOrWeeks("days");
+            txt_bondWeeks.Text = listBox_TimeSpan_Context.GetCurrentTC().PrintDaysOrWeeks("weeks");
+            cmb_timeSpan.Text = listBox_TimeSpan_Context.GetCurrentTC().BelongTo.Outline;
+        }
+
+        /// <summary>
         /// 处理日程表单击事件
         /// </summary>
         /// <param name="sender"></param>
@@ -141,7 +157,10 @@ namespace 日程管理生成系统
                         TableItem_Title tt2 = (TableItem_Title)Current_Table[new Point(0, y)];
                         cmb_timeSpan.Items.Add(tt2.TimeSpan_Title.Outline);
                     }
-                    
+                    cmb_timeSpan.Text = cmb_timeSpan.Items[0].ToString();
+                    txt_bondDays.Text = listBox_TimeSpan_Context.GetCurrentTC().PrintDaysOrWeeks("days");
+                    txt_bondWeeks.Text = listBox_TimeSpan_Context.GetCurrentTC().PrintDaysOrWeeks("weeks");
+
                     break;
                 default:
                     break;
@@ -291,5 +310,7 @@ namespace 日程管理生成系统
         {
             Environment.Exit(0);
         }
+
+
     }
 }

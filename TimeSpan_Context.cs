@@ -149,6 +149,11 @@ namespace 日程管理生成系统
                 default:
                     break;
             }
+            if(deal.Count()==1)
+            {
+                result = deal[0].ToString();
+                return result ;
+            }
             for(int i = 0;i<deal.Count();i++)
             {
                 if (Math.Abs(deal[i] - deal[i + 1]) == 1)

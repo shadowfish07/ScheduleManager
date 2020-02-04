@@ -518,6 +518,7 @@
             this.listb_context.Name = "listb_context";
             this.listb_context.Size = new System.Drawing.Size(154, 124);
             this.listb_context.TabIndex = 15;
+            this.listb_context.Click += new System.EventHandler(this.list_Click);
             // 
             // label5
             // 
