@@ -14,14 +14,13 @@ namespace 日程管理生成系统
         private Hashtable table_current ;
         private Label[] positioningLabel;
         private Panel panel;
+        /// <summary>
+        /// 用来清空列表时清除所有创建的Label
+        /// </summary>
+        private List<Label> createdLabel = new List<Label>();
 
         private const int COLUMN_SPAN_FIRST = 51;
         private const int COLUMN_SPAN = 78;  
-
-        public void Edit(Point location,TimeSpan timeSpan)
-        {
-
-        }
         
         /// <summary>
         /// 返回列表行数
@@ -45,23 +44,28 @@ namespace 日程管理生成系统
             this.table_current = table_current;
         }
 
-        public void CreatTable(Table table_data)
+        public void CreatTable(Table table_data,int currentWeek)
         {
+            ClearTable();
             int x = 0;
             int y = 0;
             positioningLabel[0].Text = table_data.TableName;
             List<TimeSpan_Title> timeSpan_list_sorted = TimeSpan_Title.Sort(table_data.GetTitileList());
             foreach (var item in timeSpan_list_sorted)
             {
-                CreatItem(x, y++, item);
+                //CreatItem(x, y++, item);
                 foreach (var item2 in item.Context)
                 {
-                    foreach (var day in item2.InDays)
+                    if (item2.IsInThisWeek(currentWeek))
                     {
-                        if (day != 0)
-                            CreatItem(positioningLabel[day].Location.X, y, item2);
+                        foreach (var day in item2.InDays)
+                        {
+                            if (day != 0)
+                                CreatItem(day, y, item2);
+                        }
                     }
                 }
+                CreatItem(x, y++, item);
             }
             //填补空位
             for (x = 1;x<=7;x++)
@@ -81,19 +85,24 @@ namespace 日程管理生成系统
             int resultY;
             resultX = positioningLabel[x].Location.X;
             resultY = positioningLabel[x].Location.Y + COLUMN_SPAN_FIRST + y * COLUMN_SPAN;
-           
-            Label newLbl = new Label()
+
+            if (!table_current.ContainsKey(new Point(x, y)))
             {
-                Font = new Font(new FontFamily("微软雅黑"), (float)10.28571),
-                Location = new Point(resultX, resultY),
-                AutoSize = false,
-                Size = new Size(123, 78),
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-            panel.Controls.Add(newLbl);
-            TableItem_Context newTC = new TableItem_Context(newLbl);
-            newTC.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
-            table_current.Add(new Point(x, y), newTC);
+                Label newLbl = new Label()
+                {
+                    Font = new Font(new FontFamily("微软雅黑"), (float)10.28571),
+                    Location = new Point(resultX, resultY),
+                    AutoSize = false,
+                    Size = new Size(123, 78),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                panel.Controls.Add(newLbl);
+                TableItem_Context newTC = new TableItem_Context(newLbl,new Point(x,y));
+                newTC.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
+                createdLabel.Add(newLbl);
+                table_current.Add(new Point(x, y), newTC);
+            }
+            
         }
 
         private void CreatItem(int x, int y, TimeSpan item)
@@ -107,33 +116,32 @@ namespace 日程管理生成系统
             if (item.GetType() == typeof(TimeSpan_Title))
             {
                 //创建title
-
-                TimeSpan_Title tmp = (TimeSpan_Title)item;
-                Label newLbl = new Label()
+                if(!table_current.ContainsKey(new Point(x,y)))
                 {
-                    Font = new Font(new FontFamily("微软雅黑"), (float)10.28571),
-                    Location = new Point(resultX, resultY),
-                    AutoSize = false,
-                    Size = new Size(123, 78),
-                    TextAlign = ContentAlignment.MiddleCenter
-                };
-                newLbl.Text = tmp.Outline + "\n" + tmp.StartTime.ToString("t") + "-" + tmp.EndTime.ToString("t");
-                TableItem_Title newTT = new TableItem_Title(newLbl, (TimeSpan_Title)item);
-                newTT.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
-                table_current.Add(new Point(x, y),newTT);
-                panel.Controls.Add(newLbl);
+                    TimeSpan_Title tmp = (TimeSpan_Title)item;
+                    Label newLbl = new Label()
+                    {
+                        Font = new Font(new FontFamily("微软雅黑"), (float)10.28571),
+                        Location = new Point(resultX, resultY),
+                        AutoSize = false,
+                        Size = new Size(123, 78),
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
+                    newLbl.Text = tmp.Outline + "\n" + tmp.StartTime.ToString("t") + "-" + tmp.EndTime.ToString("t");
+                    TableItem_Title newTT = new TableItem_Title(newLbl, (TimeSpan_Title)item,new Point(x,y));
+                    newTT.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
+                    table_current.Add(new Point(x, y), newTT);
+                    panel.Controls.Add(newLbl);
+                }
             }
             else
             {
                 //创建context
-
                 TimeSpan_Context tmp = (TimeSpan_Context)item;
                 if (table_current.ContainsKey(new Point(x,y)))
                 {
-                    //已存在时，添加
-                    
+                    //已存在时,仅绘制信息
                     TableItem_Context ttmp = (TableItem_Context)table_current[new Point(x, y)];
-                    ttmp.Add(tmp);
                     ttmp.UpdateLableText();
                 }
                 else
@@ -148,15 +156,27 @@ namespace 日程管理生成系统
                         Size = new Size(123, 78),
                         TextAlign = ContentAlignment.MiddleCenter
                     };
-                    TableItem_Context newTC = new TableItem_Context(newLbl,new TimeSpan_Context[] { (TimeSpan_Context)item });
+                    TableItem_Context newTC = new TableItem_Context(newLbl,new TimeSpan_Context[] { (TimeSpan_Context)item }, new Point(x, y));
                     newTC.LabelClickedEvent += ProgramData.Form_TableEdit.TableItem_Clicked;
                     table_current.Add(new Point(x, y), newTC);
                     newTC.UpdateLableText();
                     panel.Controls.Add(newLbl);
+                    createdLabel.Add(newLbl);
                 }
             }
             
 
+        }
+
+        private void ClearTable()
+        {
+            if (createdLabel.Count == 0)
+                return;
+            foreach (var item in createdLabel)
+            {
+                //label执行清空处理
+                item.Text = "";
+            }
         }
     }
 }

@@ -106,6 +106,8 @@
             this.btn_preWeek.TabIndex = 10;
             this.btn_preWeek.Text = "<";
             this.btn_preWeek.UseVisualStyleBackColor = true;
+            this.btn_preWeek.Visible = false;
+            this.btn_preWeek.Click += new System.EventHandler(this.btn_preWeek_Click);
             // 
             // btn_NextWeek
             // 
@@ -116,6 +118,7 @@
             this.btn_NextWeek.TabIndex = 9;
             this.btn_NextWeek.Text = ">";
             this.btn_NextWeek.UseVisualStyleBackColor = true;
+            this.btn_NextWeek.Click += new System.EventHandler(this.btn_NextWeek_Click);
             // 
             // lbl_Sunday
             // 

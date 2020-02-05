@@ -16,18 +16,20 @@ namespace 日程管理生成系统
         private Label label;
         public delegate void LabelClickedHandler(TableItem sender, LabelClickedEventArgs e);
         public event LabelClickedHandler LabelClickedEvent;
-        
+
         public Point Location { get => location; set => location = value; }
         public Label Label { get => label; set => label = value; }
 
-        public TableItem(Label label)
+        public TableItem(Label label,Point location)
         {
             Label = label;
+            Location = location;
         }
 
-        protected virtual void OnClicked(object sender,EventArgs e)
+        protected virtual void OnClicked(object sender, EventArgs e)
         {
             LabelClickedEvent((TableItem)sender, new LabelClickedEventArgs((TableItem)sender));
         }
     }
+
 }

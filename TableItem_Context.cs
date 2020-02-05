@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace 日程管理生成系统
 {
 
     /// <summary>
-    /// 表达一个日程表内容项，包含一系列事件（List中的TimeSpan_Context），Label和位置
+    /// 表达一个日程表内容项，包含一系列日程事件（List中的TimeSpan_Context），Label和位置
     /// </summary>
     class TableItem_Context : TableItem
     {
         private List<TimeSpan_Context> timeSpan= new List<TimeSpan_Context>();
 
 
-        public TableItem_Context(Label label, TimeSpan_Context[] timespan) : base(label)
+        public TableItem_Context(Label label, TimeSpan_Context[] timespan,Point location) : base(label,location)
         {
             Label.Click += OnClicked;
 
@@ -23,7 +24,7 @@ namespace 日程管理生成系统
                 this.timeSpan.Add(timespan[i]);
 
         }
-        public TableItem_Context(Label label) : base(label)
+        public TableItem_Context(Label label,Point location) : base(label,location)
         {
             Label.Click += OnClicked;
 

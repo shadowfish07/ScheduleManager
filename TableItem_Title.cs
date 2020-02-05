@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace 日程管理生成系统
 {
@@ -13,13 +14,13 @@ namespace 日程管理生成系统
     {
         private TimeSpan_Title timeSpan_Title;
 
-        public TableItem_Title(Label label):base(label)
+        public TableItem_Title(Label label,Point location):base(label,location)
         {
             Label.Click += OnClicked;
 
         }
 
-        public TableItem_Title(Label label,TimeSpan_Title timeSpan_Title) : base(label)
+        public TableItem_Title(Label label,TimeSpan_Title timeSpan_Title,Point location) : base(label,location)
         {
             this.TimeSpan_Title = timeSpan_Title;
             Label.Click += OnClicked;

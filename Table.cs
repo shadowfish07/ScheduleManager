@@ -24,11 +24,12 @@ namespace 日程管理生成系统
         }
 
         //TODO:添加完后需要重绘表格
-        public void AddTimeSpan_Context(int[] inDays,int[] weeks,TimeSpan_Title belongTo)
+        public TimeSpan_Context AddTimeSpan_Context(int[] inDays,int[] weeks,TableItem_Title belongTo)
         {
             TimeSpan_Context newtc = new TimeSpan_Context(inDays, weeks, belongTo);
-            belongTo.Context.Add(newtc);
+            belongTo.TimeSpan_Title.Context.Add(newtc);
             timeSpanList_Context.Add(newtc);
+            return newtc;
         }
 
         public bool AddTimeSpan_Title(TimeSpan_Title timeSpan)

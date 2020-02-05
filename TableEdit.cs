@@ -44,7 +44,7 @@ namespace 日程管理生成系统
 
             tbDrawer = new TableDrawControl(panel1, Current_Table, new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
 
-            tbDrawer.CreatTable(Table_DataSource);
+            tbDrawer.CreatTable(Table_DataSource,currentWeek);
 
         }
         public TableEdit(Table table)
@@ -149,9 +149,9 @@ namespace 日程管理生成系统
                         NewContext(Current_TableItem);
 
                     txt_outline_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Outline;
-                    txt_describsion_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Outline;
+                    txt_describsion_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Describsion;
                     cmb_timeSpan.Items.Clear();
-                    //枚举所有Title
+                    //枚举所有Title打印在绑定时间中
                     for (int y = 0;Current_Table.ContainsKey(new Point(0,y));y++) 
                     {
                         TableItem_Title tt2 = (TableItem_Title)Current_Table[new Point(0, y)];
@@ -230,12 +230,18 @@ namespace 日程管理生成系统
         /// <param name="tableItem"></param>
         private void NewContext(TableItem tableItem)
         {
-            TimeSpan_Context newTC = new TimeSpan_Context(new int[] {tableItem.Location.X},new int[] { currentWeek }, (TableItem_Title)Current_Table[new Point(0, tableItem.Location.Y)]);
+            System.Diagnostics.Debug.Print(tableItem.Location.X.ToString());
+            TimeSpan_Context newTC = Table_DataSource.AddTimeSpan_Context(new int[] { tableItem.Location.X }, new int[] { currentWeek }, (TableItem_Title)Current_Table[new Point(0, tableItem.Location.Y)]);
+            //TimeSpan_Context newTC = new TimeSpan_Context(new int[] {tableItem.Location.X},new int[] { currentWeek }, (TableItem_Title)Current_Table[new Point(0, tableItem.Location.Y)]);
             newTC.Outline = "新建事件";
             listBox_TimeSpan_Context.Add(newTC);
             listBox_TimeSpan_Context.Listbox.SelectedIndex = listBox_TimeSpan_Context.Listbox.Items.Count - 1;
             TableItem_Context TC = (TableItem_Context)tableItem;
             TC.Add(newTC);
+
+            txt_outline_context.Text = "新建事件";//防止保存时outline的值被误写
+            txt_describsion_context.Text = "";
+            btn_SaveContext_Click(null, null);
         }
 
         /// <summary>
@@ -244,10 +250,12 @@ namespace 日程管理生成系统
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_SaveContext_Click(object sender, EventArgs e)
-        {//test
+        {
             TableItem_Context tc = (TableItem_Context)Current_TableItem;
-            TimeSpan_Context tsc = listBox_TimeSpan_Context.GetCurrentTC();//?test
+            //Table_DataSource.AddTimeSpan_Context()
+            TimeSpan_Context tsc = listBox_TimeSpan_Context.GetCurrentTC();
             tsc.Describsion = txt_describsion_context.Text;
+            tsc.Outline = txt_outline_context.Text;
             try
             {
                 tsc.ReadDays(txt_bondDays.Text);
@@ -257,7 +265,7 @@ namespace 日程管理生成系统
                 tsc.ReadWeeks(txt_bondWeeks.Text);
             }
             catch (ArgumentException) {}
-            tsc.Outline = txt_outline_context.Text;
+            
             tc.UpdateLableText();
         }
         /// <summary>
@@ -311,6 +319,33 @@ namespace 日程管理生成系统
             Environment.Exit(0);
         }
 
+        private void btn_preWeek_Click(object sender, EventArgs e)
+        {
+            if (currentWeek == 2)
+            {
+                btn_preWeek.Visible = false;
+            } 
+            btn_NextWeek.Visible = true;
+            currentWeek--;
+            lbl_week_index.Text = "第" + currentWeek.ToString() + "周";
+            tbDrawer.CreatTable(Table_DataSource, currentWeek);
+        }
 
+        private void btn_NextWeek_Click(object sender, EventArgs e)
+        {
+            if (currentWeek == Table_DataSource.MaxiWeek - 1)
+            {
+                btn_NextWeek.Visible = false;
+            }
+            btn_preWeek.Visible = true;
+            currentWeek++;
+            lbl_week_index.Text = "第" + currentWeek.ToString() + "周";
+            tbDrawer.CreatTable(Table_DataSource, currentWeek);
+        }
+
+        private void ReadCurrentWeekTable()
+        {
+
+        }
     }
 }
