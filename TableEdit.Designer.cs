@@ -551,7 +551,7 @@
             this.Font = new System.Drawing.Font("微软雅黑", 9.07563F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TableEdit";
-            this.Text = "TableEdit";
+            this.Text = "日志管理生成系统——日程表编辑";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TableEdit_FormClosed);
             this.Load += new System.EventHandler(this.TableEdit_Load);
             this.panel1.ResumeLayout(false);
