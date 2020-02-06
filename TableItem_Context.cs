@@ -11,7 +11,7 @@ namespace 日程管理生成系统
     /// <summary>
     /// 表达一个日程表内容项，包含一系列日程事件（List中的TimeSpan_Context），Label和位置
     /// </summary>
-    class TableItem_Context : TableItem
+    public class TableItem_Context : TableItem
     {
         private List<TimeSpan_Context> timeSpan= new List<TimeSpan_Context>();
 
@@ -37,6 +37,16 @@ namespace 日程管理生成系统
         }
 
         //TODO:重绘图表
+
+        /// <summary>
+        /// 移除特定的某个日程，同时刷新label
+        /// </summary>
+        /// <param name="timeSpan_Context"></param>
+        public void RemoveContext(TimeSpan_Context timeSpan_Context)
+        {
+            timeSpan.Remove(timeSpan_Context);
+            UpdateLableText();
+        }
 
         #region 用不到的且不能用的重载
         ///// <summary>
@@ -73,18 +83,33 @@ namespace 日程管理生成系统
             //加入修改失败时重置,进行深拷贝
             //TODO:需要测试深拷贝是否有效
             TimeSpan_Context tmp = (TimeSpan_Context)target.Clone();
+
             target.Describsion = describsion;
+
             try
             {
                 target.ReadDays(inDays);
+            }
+            catch (ArgumentException)
+            {
+                //重置
+                target = tmp;
+                throw new Exception("绑定日期格式错误");
+            }
+
+
+
+            try
+            {
                 target.ReadWeeks(weeks);
             }
             catch (ArgumentException)
             {
                 //重置
                 target = tmp;
-                throw;
+                throw new Exception("绑定周数格式错误");
             }
+
             target.Outline = outline;
             UpdateLableText();
         }
@@ -97,30 +122,45 @@ namespace 日程管理生成系统
             Label.Text = "";
             foreach (var item in this.timeSpan)
             {
-                Label.Text += item.Outline + "\n" + item.Describsion + "\n";//TODO:添加文本过长时，只显示概要的功能
+                Label.Text += item.Outline + "\n";//TODO:添加文本过长时，只显示概要的功能
             }
         }
 
         /// <summary>
-        /// 移动一个内容至另一个时间区间
+        /// 重绘该单元格内所有事件的内容
         /// </summary>
-        /// <param name="newBelongTo">新的时间区间</param>
-        /// <param name="oldIndex">该单元格内要移动的事件的序号</param>
-        public void Move(TimeSpan_Title newBelongTo,int oldIndex)
+        /// <param name="day">要绘制的day,若不存在则仅清空label</param>
+        public void UpdateLableText(int day)
         {
-            TimeSpan_Context target = this.timeSpan.Find(t => t.Index1 == oldIndex);
-            newBelongTo.Context.Add(target);
-            target.BelongTo = newBelongTo;
-            target.BelongTo.Context.Remove(target);
+            Label.Text = "";
+            foreach (var item in this.timeSpan)
+            {
+                if (item.IsInThisDay(day))
+                    Label.Text += item.Outline + "\n";//TODO:添加文本过长时，只显示概要的功能
+            }
         }
 
+        ///// <summary>
+        ///// 移动一个内容至另一个时间区间
+        ///// </summary>
+        ///// <param name="newBelongTo">新的时间区间</param>
+        ///// <param name="oldIndex">该单元格内要移动的事件的序号</param>
+        //public void Move(TimeSpan_Title newBelongTo,int oldIndex)
+        //{
+        //    TimeSpan_Context target = this.timeSpan.Find(t => t.Index1 == oldIndex);
+        //    newBelongTo.Context.Add(target);
+        //    target.BelongTo_TimeSpan_Titles = newBelongTo;
+        //    target.BelongTo_TimeSpan_Titles.Context.Remove(target);
+        //}
+
         /// <summary>
-        /// 添加一个事件
+        /// 添加一个事件,同时刷新label
         /// </summary>
         /// <param name="timeSpan_Context"></param>
         public void Add(TimeSpan_Context timeSpan_Context)
         {
             timeSpan.Add(timeSpan_Context);
+            UpdateLableText();
         }
 
         /// <summary>

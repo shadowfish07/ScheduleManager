@@ -15,27 +15,39 @@ namespace 日程管理生成系统
     {
         private int[] inDays;
         private int[] weeks;
-        private TimeSpan_Title belongTo;
+        private List<TimeSpan_Title> belongTo_TimeSpan_Titles = new List<TimeSpan_Title>();
+        private List<TableItem_Context> belongTo_TableItem_Context = new List<TableItem_Context>();
+
+        public delegate void HandleDay(object sender, HandleDayEventArgs e);
+        public event HandleDay HandleDayEvent;
 
 
         public int[] InDays { get => inDays; set => inDays = value; }
         public int[] Weeks { get => weeks; set => weeks = value; }
-        internal TimeSpan_Title BelongTo { get => belongTo; set => belongTo = value; }
+        internal List<TimeSpan_Title> BelongTo_TimeSpan_Titles { get => belongTo_TimeSpan_Titles; set => belongTo_TimeSpan_Titles = value; }
+        public List<TableItem_Context> BelongTo_TableItem_Context { get => belongTo_TableItem_Context; set => belongTo_TableItem_Context = value; }
 
-        public TimeSpan_Context(int[] inDays,int[] weeks,TimeSpan_Title belongTo)
+        public TimeSpan_Context(int[] inDays, int[] weeks, TableItem_Title belongTo_TableItem_Title,TableItem_Context belongTo_TableItem_Context)
         {
             InDays = inDays;
             Weeks = weeks;
-            BelongTo = belongTo;
+            BelongTo_TimeSpan_Titles.Add(belongTo_TableItem_Title.TimeSpan_Title);
+            BelongTo_TableItem_Context.Add(belongTo_TableItem_Context);
         }
 
-        public TimeSpan_Context(int[] inDays, int[] weeks, TableItem_Title belongTo)
+        public TimeSpan_Context(int[] inDays, int[] weeks, TableItem_Title[] belongTo_TableItem_Title, TableItem_Context[] belongTo_TableItem_Context)
         {
             InDays = inDays;
             Weeks = weeks;
-            BelongTo = belongTo.TimeSpan_Title;
+            foreach (var item in belongTo_TableItem_Title)
+            {
+                belongTo_TimeSpan_Titles.Add(item.TimeSpan_Title);
+            }
+            foreach (var item in belongTo_TableItem_Context)
+            {
+                BelongTo_TableItem_Context.Add(item);
+            }
         }
-
         /// <summary>
         /// 返回深拷贝
         /// </summary>
@@ -65,7 +77,38 @@ namespace 日程管理生成系统
         {
             try
             {
-                inDays = ReadDaysOrWeeks(days);
+                int[] tmpinDays = ReadDaysOrWeeks(days);
+
+                //处理多出的天
+                foreach (var day in tmpinDays)
+                {
+                    if (!IsInThisDay(day))
+                    {
+                        HandleDayEvent(this, new HandleDayEventArgs(day,HandleDayEventArgs.HandleType.add));
+                    }
+                }
+
+                //处理少去的天
+                foreach (var item in InDays)
+                {
+                    Boolean flag = false;
+                    foreach (var item2 in tmpinDays)
+                    {
+                        if (item == item2)
+                        {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag)
+                    {
+                        HandleDayEvent(this, new HandleDayEventArgs(item, HandleDayEventArgs.HandleType.remove));
+                    }
+                }
+
+
+                InDays = tmpinDays;
+
             }
             catch (ArgumentException e)
             {
@@ -154,7 +197,7 @@ namespace 日程管理生成系统
                 result = deal[0].ToString();
                 return result ;
             }
-            for(int i = 0;i<deal.Count();i++)
+            for(int i = 0;i<deal.Count()-1;i++)
             {
                 if (Math.Abs(deal[i] - deal[i + 1]) == 1)
                 {

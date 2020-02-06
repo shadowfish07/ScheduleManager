@@ -137,7 +137,6 @@ namespace 日程管理生成系统
             else
             {
                 //创建context
-                TimeSpan_Context tmp = (TimeSpan_Context)item;
                 if (table_current.ContainsKey(new Point(x,y)))
                 {
                     //已存在时,仅绘制信息

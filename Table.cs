@@ -12,7 +12,15 @@ namespace 日程管理生成系统
         private List<TimeSpan_Title> timeSpanList_Titles = new List<TimeSpan_Title>();//存所有title类型的timespan
         private string tableName ="admin";
         private int maxiWeek;
-        
+
+        public delegate void HandleDay(object sender, HandleDayEventArgs e);
+
+        /// <summary>
+        /// 这个属性声明可以避免序列化时序列化了事件订阅者。前缀field不可去除，详情见该问题
+        /// <see cref="https://stackoverflow.com/questions/4450830/difference-between-field-nonserialized-and-nonserialized-in-c-sharp" />
+        /// </summary>
+        [field: NonSerialized]
+        public event HandleDay HandleDayEvent;
 
         public string TableName { get => tableName; set => tableName = value; }
         public int MaxiWeek { get => maxiWeek; set => maxiWeek = value; }
@@ -24,12 +32,18 @@ namespace 日程管理生成系统
         }
 
         //TODO:添加完后需要重绘表格
-        public TimeSpan_Context AddTimeSpan_Context(int[] inDays,int[] weeks,TableItem_Title belongTo)
+        public TimeSpan_Context AddTimeSpan_Context(int[] inDays,int[] weeks,TableItem_Title belongTo_TableItem_Title,TableItem_Context belongTo_TableItem_Context)
         {
-            TimeSpan_Context newtc = new TimeSpan_Context(inDays, weeks, belongTo);
-            belongTo.TimeSpan_Title.Context.Add(newtc);
+            TimeSpan_Context newtc = new TimeSpan_Context(inDays, weeks, belongTo_TableItem_Title,belongTo_TableItem_Context);
+            newtc.HandleDayEvent += HandleDay_Handle;
+            belongTo_TableItem_Title.TimeSpan_Title.Context.Add(newtc);
             timeSpanList_Context.Add(newtc);
             return newtc;
+        }
+
+        private void HandleDay_Handle(object sender, HandleDayEventArgs e)
+        {
+            HandleDayEvent(sender, e);
         }
 
         public bool AddTimeSpan_Title(TimeSpan_Title timeSpan)
