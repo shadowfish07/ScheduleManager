@@ -157,7 +157,7 @@ namespace 日程管理生成系统
         /// 添加一个事件,同时刷新label
         /// </summary>
         /// <param name="timeSpan_Context"></param>
-        public void Add(TimeSpan_Context timeSpan_Context)
+        public void AddContext(TimeSpan_Context timeSpan_Context)
         {
             timeSpan.Add(timeSpan_Context);
             UpdateLableText();

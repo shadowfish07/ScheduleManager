@@ -13,14 +13,17 @@ namespace 日程管理生成系统
         private string tableName ="admin";
         private int maxiWeek;
 
-        public delegate void HandleDay(object sender, HandleDayEventArgs e);
+        public delegate void HandleDayOrWeek(object sender, HandleDayOrWeekEventArgs e);
 
         /// <summary>
         /// 这个属性声明可以避免序列化时序列化了事件订阅者。前缀field不可去除，详情见该问题
         /// <see cref="https://stackoverflow.com/questions/4450830/difference-between-field-nonserialized-and-nonserialized-in-c-sharp" />
         /// </summary>
         [field: NonSerialized]
-        public event HandleDay HandleDayEvent;
+        public event HandleDayOrWeek HandleDayEvent;
+        [field: NonSerialized]
+        public event HandleDayOrWeek HandleWeekEvent;
+
 
         public string TableName { get => tableName; set => tableName = value; }
         public int MaxiWeek { get => maxiWeek; set => maxiWeek = value; }
@@ -36,12 +39,18 @@ namespace 日程管理生成系统
         {
             TimeSpan_Context newtc = new TimeSpan_Context(inDays, weeks, belongTo_TableItem_Title,belongTo_TableItem_Context);
             newtc.HandleDayEvent += HandleDay_Handle;
+            newtc.HandleWeekEvent += HandleWeek_Handle;
             belongTo_TableItem_Title.TimeSpan_Title.Context.Add(newtc);
             timeSpanList_Context.Add(newtc);
             return newtc;
         }
 
-        private void HandleDay_Handle(object sender, HandleDayEventArgs e)
+        private void HandleWeek_Handle(object sender, HandleDayOrWeekEventArgs e)
+        {
+            HandleWeekEvent(sender, e);
+        }
+
+        private void HandleDay_Handle(object sender, HandleDayOrWeekEventArgs e)
         {
             HandleDayEvent(sender, e);
         }

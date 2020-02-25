@@ -11,7 +11,7 @@ namespace 日程管理生成系统
     //TODO:TEST ALL FUNCTION
     class TableDrawControl
     {
-        private Hashtable table_current ;
+        private Dictionary<Point,TableItem> table_current ;
         private Label[] positioningLabel;
         private Panel panel;
         /// <summary>
@@ -37,7 +37,7 @@ namespace 日程管理生成系统
         /// </summary>
         /// <param name="panel"></param>
         /// <param name="positioningLabel">周一从第2个元素开始</param>
-        public TableDrawControl(Panel panel,Hashtable table_current,Label[] positioningLabel)
+        public TableDrawControl(Panel panel,Dictionary<Point,TableItem> table_current,Label[] positioningLabel)
         {
             this.panel = panel;
             this.positioningLabel = positioningLabel;
