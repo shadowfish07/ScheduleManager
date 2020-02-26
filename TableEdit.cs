@@ -27,7 +27,7 @@ namespace 日程管理生成系统
         //存储TableItem的XY坐标，用来以坐标访问TableItem
         Dictionary<Point,TableItem> Current_Table = new Dictionary<Point, TableItem>();
         //当前打开的TableItem
-        TableItem Current_TableItem;
+        protected TableItem Current_TableItem;
 
         int currentWeek;
 
@@ -87,13 +87,15 @@ namespace 日程管理生成系统
                     if (tableItem_Context.Location.X == e.Value)
                         ((TableItem_Context)tableItem_Context).RemoveContext((TimeSpan_Context)sender);
                 }
+                //TODO：若当前显示单元格中无该事件，自动跳转至有的单元格
+
             }
         }
 
         private void TableEdit_Load(object sender, EventArgs e)
         {
             //l.Remove(l.FindLast(t => t.Index1 == 1));
-            listBox_TimeSpan_Context = new EnhancedList(listb_context);
+            listBox_TimeSpan_Context = new EnhancedList(listb_context,this);
 
             tbDrawer = new TableDrawControl(panel1, Current_Table, new Label[] { lbl_table_name, lbl_Mondy, lbl_Tuesday, lbl_Wednesday, lbl_Thusday, lbl_Friday, lbl_Saturday, lbl_Sunday });
 
@@ -105,17 +107,31 @@ namespace 日程管理生成系统
         /// <summary>
         /// 为Listbox增加绑定了一个存储TimeSpan_Contest列表的类，支持通过选择的列表项获取TimeSpan_Contest
         /// </summary>
-        /// TODO:貌似多余了，listbox似乎可以直接添加对象，只要再实现一下对象的ToString()?
+        /// TODO:貌似多余了，listbox似乎可以直接添加对象，只要再实现一下对象的ToString()?：：：：可以加点方法，不用代替
         class EnhancedList
         {
+            TableEdit tableEdit;
             ListBox listbox;
             List<TimeSpan_Context> TcinList = new List<TimeSpan_Context>();
 
             public ListBox Listbox { get => listbox; set => listbox = value; }
             public List<TimeSpan_Context> TimeSpan_ContextInList { get => TcinList; set => TcinList = value; }
 
-            public EnhancedList(ListBox listBox)
+
+            /// <summary>
+            /// 设置listbox的当前选择项
+            /// </summary>
+            /// <param name="index"></param>
+            /// <param name="doClick">可选，为要执行Click事件的e参数</param>
+            public void SetSelectedItem(int index,LabelClickedEventArgs args =null)
             {
+                Listbox.SelectedIndex = index;
+                if(args!=null) tableEdit.TableItem_Clicked(tableEdit.Current_TableItem,args);
+            }
+
+            public EnhancedList(ListBox listBox,TableEdit tableEdit)
+            {
+                this.tableEdit = tableEdit;
                 Listbox = listBox;
             }
 
@@ -202,9 +218,11 @@ namespace 日程管理生成系统
 
                     if (tc.IsEmpty())
                         NewContext(Current_TableItem);
-
-                    txt_outline_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Outline;
-                    txt_describsion_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Describsion;
+                    else
+                    {
+                        txt_outline_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Outline;
+                        txt_describsion_context.Text = listBox_TimeSpan_Context.GetCurrentTC().Describsion;
+                    }
                     cmb_timeSpan.Items.Clear();
                     //枚举所有Title打印在绑定时间中
                     for (int y = 0;Current_Table.ContainsKey(new Point(0,y));y++) 
@@ -285,12 +303,10 @@ namespace 日程管理生成系统
         /// <param name="tableItem"></param>
         private void NewContext(TableItem tableItem)
         {
-            TableItem_Context TC = (TableItem_Context)tableItem;
-            TimeSpan_Context newTC = Table_DataSource.AddTimeSpan_Context(new int[] { tableItem.Location.X }, new int[] { CurrentWeek }, (TableItem_Title)Current_Table[new Point(0, tableItem.Location.Y)],TC);
+            TimeSpan_Context newTC = Table_DataSource.AddTimeSpan_Context(new int[] { tableItem.Location.X }, new int[] { CurrentWeek }, (TableItem_Title)Current_Table[new Point(0, tableItem.Location.Y)], (TableItem_Context)tableItem);
             newTC.Outline = "新建事件";
             listBox_TimeSpan_Context.Add(newTC);
             listBox_TimeSpan_Context.Listbox.SelectedIndex = listBox_TimeSpan_Context.Listbox.Items.Count - 1;
-            TC.AddContext(newTC);
 
             //防止保存时值被误写
             txt_outline_context.Text = "新建事件";
@@ -309,7 +325,6 @@ namespace 日程管理生成系统
         private void btn_SaveContext_Click(object sender, EventArgs e)
         {
             //TODO:功能应迁移至table类中的edit
-            TableItem_Context tc = (TableItem_Context)Current_TableItem;
             TimeSpan_Context tsc = listBox_TimeSpan_Context.GetCurrentTC();
             tsc.Describsion = txt_describsion_context.Text;
             tsc.Outline = txt_outline_context.Text;
@@ -318,7 +333,6 @@ namespace 日程管理生成系统
             {
                 tsc.ReadDays(txt_bondDays.Text);
             }catch (ArgumentException){}
-
 
 
             try
@@ -373,7 +387,18 @@ namespace 日程管理生成系统
         /// <param name="e"></param>
         private void btn_deleteContext_Click(object sender, EventArgs e)
         {
-
+            Table_DataSource.RemoveTimeSpan_Context(listBox_TimeSpan_Context.GetCurrentTC().ID);
+            listBox_TimeSpan_Context.Remove(listBox_TimeSpan_Context.GetCurrentTC());
+            if(listBox_TimeSpan_Context.Listbox.Items.Count==0)
+            {
+                NewContext(Current_TableItem);
+            }
+            else
+            {
+                listBox_TimeSpan_Context.SetSelectedItem(0, new LabelClickedEventArgs(Current_TableItem));
+            }
+            //刷新表格
+            tbDrawer.CreatTable(Table_DataSource, CurrentWeek);
         }
 
         private void TableEdit_FormClosed(object sender, FormClosedEventArgs e)

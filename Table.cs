@@ -34,16 +34,35 @@ namespace 日程管理生成系统
             MaxiWeek = maxiWeek;
         }
 
-        //TODO:添加完后需要重绘表格
+        //TODO:添加完后需要重绘表格（当前的引用后已经进行了重绘）
+        /// <summary>
+        /// 添加一个事件
+        /// </summary>
+        /// <param name="inDays"></param>
+        /// <param name="weeks"></param>
+        /// <param name="belongTo_TableItem_Title">事件所属的时间区间</param>
+        /// <param name="belongTo_TableItem_Context">事件</param>
+        /// <returns>返回该事件的TimeSpan_Context对象</returns>
         public TimeSpan_Context AddTimeSpan_Context(int[] inDays,int[] weeks,TableItem_Title belongTo_TableItem_Title,TableItem_Context belongTo_TableItem_Context)
         {
-            TimeSpan_Context newtc = new TimeSpan_Context(inDays, weeks, belongTo_TableItem_Title,belongTo_TableItem_Context);
-            newtc.HandleDayEvent += HandleDay_Handle;
-            newtc.HandleWeekEvent += HandleWeek_Handle;
-            belongTo_TableItem_Title.TimeSpan_Title.Context.Add(newtc);
-            timeSpanList_Context.Add(newtc);
-            return newtc;
+            TimeSpan_Context result = new TimeSpan_Context(inDays, weeks, belongTo_TableItem_Title,belongTo_TableItem_Context);
+            result.HandleDayEvent += HandleDay_Handle;
+            result.HandleWeekEvent += HandleWeek_Handle;
+            belongTo_TableItem_Title.TimeSpan_Title.Context.Add(result);
+            timeSpanList_Context.Add(result);
+
+            belongTo_TableItem_Context.AddContext(result);
+            return result;
         }
+
+
+        public void RemoveTimeSpan_Context(int ID)
+        {
+            TimeSpan_Context beRemovedTC = timeSpanList_Context.Find(t => t.ID == ID);
+            timeSpanList_Context.Remove(beRemovedTC);
+            beRemovedTC.Delete();
+        }
+
 
         private void HandleWeek_Handle(object sender, HandleDayOrWeekEventArgs e)
         {

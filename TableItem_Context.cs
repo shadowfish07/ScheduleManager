@@ -79,7 +79,7 @@ namespace 日程管理生成系统
         /// <param name="oldIndex">要修改的事件Index值</param>
         public void Edit(string describsion, string outline, string inDays, string weeks, int oldIndex)
         {
-            TimeSpan_Context target = this.timeSpan.Find(t => t.Index1 == oldIndex);//Learn this way to find a specific item
+            TimeSpan_Context target = this.timeSpan.Find(t => t.ID == oldIndex);//Learn this way to find a specific item
             //加入修改失败时重置,进行深拷贝
             //TODO:需要测试深拷贝是否有效
             TimeSpan_Context tmp = (TimeSpan_Context)target.Clone();

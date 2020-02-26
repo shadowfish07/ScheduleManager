@@ -341,5 +341,21 @@ namespace 日程管理生成系统
             }
             return false;
         }
+    
+        /// <summary>
+        /// 删除自身及其所有引用
+        /// </summary>
+        public void Delete()
+        {
+            foreach (var item in BelongTo_TimeSpan_Titles)
+            {
+                item.Context.Remove(this);
+            }
+            foreach (var item in BelongTo_TableItem_Context)
+            {
+                item.RemoveContext(this);
+            }
+        }
+    
     }
 }
